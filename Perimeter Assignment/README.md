@@ -15,10 +15,10 @@ For this assignment, you will add or modify several methods in the PerimeterAssi
 ## Part 1:
 Our goals for this exercise are to: 
 
-1a. Complete writing the method getNumPoints that has one parameter s that is of type Shape. This method returns an integer that is the number of points in Shape s. 
+1. Complete writing the method getNumPoints that has one parameter s that is of type Shape. This method returns an integer that is the number of points in Shape s. 
 
-1b. Add code in the method testPerimeter to call getNumPoints and to print the result.
+2. Add code in the method testPerimeter to call getNumPoints and to print the result.
 
-2a. Complete writing the method getAverageLength that has one parameter s that is of type Shape. This method returns a number of type double that is the calculated average of all the sides’ lengths in the Shape S.
+3. Complete writing the method getAverageLength that has one parameter s that is of type Shape. This method returns a number of type double that is the calculated average of all the sides’ lengths in the Shape S.
 
-2b. Add code in the method testPerimeter to call the method getAverageLength and to print out the result. 
+4. Add code in the method testPerimeter to call the method getAverageLength and to print out the result. 
