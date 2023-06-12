@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Part2
+comment0.text=\r\n\ A\ class\ with\ 2\ methods\ and\ a\ main\r\n\ \r\n\ Method1\:\ findSimpleGene(String\ dna,\ String\ startCodon,\ String\ endCodon)\r\n\ \ \ \ \ \ \ \ \ \ Checks\ if\ a\ DNA\ strand\ contains\ a\ valid\ sequence\ of\ DNA\ (starting\ in\ startCodon\ and\ ends\ in\ endCodon\ and\ its\ length\r\n\ \ \ \ \ \ \ \ \ \ is\ divisible\ by\ 3).\r\n\ \ \ \ \ \ \ \ \ \ If\ it\ is\ valid\ it\ returns\ the\ valid\ DNA\ sequence\r\n\ \ \ \ \ \ \ \ \ \ If\ not\ it\ returns\ an\ empty\ string.\r\n\ \ \ \ \ \ \ \ \ \ This\ method\ also\ accounts\ for\ case.\r\n\ Method2\:\ testSimpleGene()\r\n\ \ \ \ \ \ \ \ \ \ Test\ the\ findSimpleGene\ method.\r\n\r\n\ @author\ Yasmine\ ZNATNI\r\n\ @version\ 1\r\n
+comment1.params=dna\ startCodon\ endCodon
+comment1.target=java.lang.String\ findSimpleGene(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ testSimpleGene()
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

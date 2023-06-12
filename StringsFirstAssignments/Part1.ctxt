@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Part1
+comment0.text=\r\n\ A\ class\ with\ 2\ methods\ and\ a\ main\r\n\ \r\n\ Method1\:\ findSimpleGene(String\ dna)\r\n\ \ \ \ \ \ \ \ \ \ Checks\ if\ a\ DNA\ strand\ has\ a\ valid\ DNA\ sequence\ (starting\ with\ ATG\ and\ ending\ in\ TAA)\r\n\ \ \ \ \ \ \ \ \ \ Returns\ the\ sequence\ if\ it\ exists\ of\ an\ empty\ string\ if\ it\ doesn't\r\n\ Method2\:\ testSimpleGene()\r\n\ \ \ \ \ \ \ \ \ \ Tests\ the\ findSimpleGene\ method\r\n\r\n\ @author\ Yasmine\ Znatni\r\n\ @version\ 1\ 08/06/2023\r\n
+comment1.params=dna
+comment1.target=java.lang.String\ findSimpleGene(java.lang.String)
+comment2.params=
+comment2.target=void\ testSimpleGene()
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

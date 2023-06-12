@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Part3
+comment0.text=\r\n\ A\ class\ with\ 3\ methods.\r\n\ \r\n\ Method1\:\ twoOccurrences(String\ stringa,\ String\ stringb)\r\n\ \ \ \ \ \ \ \ \ \ Checks\ if\ stringa\ occurs\ at\ least\ twice\ in\ stringb\r\n\ Method2\:\ lastPart(String\ stringa,\ String\ stringb)\r\n\ \ \ \ \ \ \ \ \ \ Returns\ the\ part\ of\ stringb\ following\ the\ first\ occurence\ of\ stringa\r\n\ \ \ \ \ \ \ \ \ \ Returns\ stringb\ in\ its\ entirety\ if\ stringa\ doesn't\ occur\ in\ stringb\r\n\ Method3\:\ testing()\r\n\ \ \ \ \ \ \ \ \ \ Tests\ the\ two\ methods\r\n\r\n\ @author\ Yasmine\ Znatni\r\n\ @version\ 1\ 08/06/2023\r\n
+comment1.params=stringa\ stringb
+comment1.target=boolean\ twoOccurrences(java.lang.String,\ java.lang.String)
+comment2.params=stringa\ stringb
+comment2.target=java.lang.String\ lastPart(java.lang.String,\ java.lang.String)
+comment3.params=
+comment3.target=void\ testing()
+numComments=4
