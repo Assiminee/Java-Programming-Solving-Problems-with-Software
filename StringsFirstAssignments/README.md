@@ -15,12 +15,15 @@ This assignment is to write the code from the lesson from scratch by following t
 3. Write the method findSimpleGene that has one String parameter dna, representing a string of DNA. This method does the following:
 
    Finds the index position of the start codon “ATG”. If there is no “ATG”, return the empty string.
+   
    Finds the index position of the first stop codon “TAA” appearing after the “ATG” that was found. If there is no such “TAA”, return the empty string. 
+   
    If the length of the substring between the “ATG” and “TAA” is a multiple of 3, then return the substring that starts with that “ATG” and ends with that “TAA”.
 
 4. Write the void method testSimpleGene that has no parameters. You should create five DNA strings. The strings should have specific test cases, such as: DNA with no “ATG”, DNA with no “TAA”, DNA with no “ATG” or “TAA”, DNA with ATG, TAA and the substring between them is a multiple of 3 (a gene), and DNA with ATG, TAA and the substring between them is not a multiple of 3. For each DNA string you should: 
 
    Print the DNA string. 
+   
    See if there is a gene by calling findSimpleGene with this string as the parameter. If a gene exists following our algorithm above, then print the gene, otherwise print the empty string.
 
 ## Part 2: Finding a Gene - Using the Simplified Algorithm Reorganized
@@ -57,8 +60,7 @@ Here are suggestions to get started:
 
 1. Create a new Java Class named Part4 in the StringsFirstAssignments project and put your code in that class.
 
-2. Use URLResource to read the file at 
-   [http://www.dukelearntoprogram.com/course2/data/manylinks.html](http://www.dukelearntoprogram.com/course2/data/manylinks.html) word by word.
+2. Use URLResource to read the file at [http://www.dukelearntoprogram.com/course2/data/manylinks.html](http://www.dukelearntoprogram.com/course2/data/manylinks.html) word by word.
 
 3. For each word, check to see if “youtube.com” is in it. If it is, find the double quote to the left and right of the occurrence of “youtube.com” to identify the beginning and end of the URL.  Note, the double quotation mark is a special character in Java. To look for a double quote, look for (\”), since the backslash (\) character indicates we want the literal quotation marks (“) and not the Java character. The string you search for would be written “\”” for one double quotation mark.
 
