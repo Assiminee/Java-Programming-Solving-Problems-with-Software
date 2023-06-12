@@ -16,7 +16,7 @@ The PerimeterAssignmentRunner class already includes the following complete meth
 
 For this assignment, you will add or modify several methods in the PerimeterAssignmentRunner class.
 
-## Part 1:
+## Part One:
 Our goals for this exercise are to: 
 
 1. Complete writing the method getNumPoints that has one parameter s that is of type Shape. This method returns an integer that is the number of points in Shape s. 
@@ -26,3 +26,14 @@ Our goals for this exercise are to:
 3. Complete writing the method getAverageLength that has one parameter s that is of type Shape. This method returns a number of type double that is the calculated average of all the sides’ lengths in the Shape S.
 
 4. Add code in the method testPerimeter to call the method getAverageLength and to print out the result. 
+
+## Part Two:
+The goals for this exercise are as follows:
+
+1. Complete writing the method getLargestSide that has one parameter s that is of type Shape. This method returns a number of type double that is the longest side in the Shape S.
+
+2. Add code in the method testPerimeter to call the method getLargestSide and to print out the result.
+
+3. Complete writing the method getLargestX that has one parameter s that is of type Shape. This method returns a number of type double that is the largest x value over all the points in the Shape s.
+
+4. Add code in the method testPerimeter to call the method getLargestX and to print out the result. Note if you were to select the file example1.txt, then the largest x value should be 4.0.
