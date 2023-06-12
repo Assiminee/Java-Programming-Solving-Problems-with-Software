@@ -56,3 +56,5 @@ FileResource fr = new FileResource(f);
 3. Finish writing the method getFileWithLargestPerimeter that has no parameters. This method should create its own Directory Resource, except that this new method returns the name of the File that has the largest such perimeter, so it has return type String.
 
 4. Add code to the method testFileWithLargestPerimeter to call getFileWithLargestPerimeter. For the File that is returned, print the name of that file.
+
+NB. The Dataset and Example files contain the "x" and "y" coordinates of points of various shapes. They are meant to be used for testing purposes.
