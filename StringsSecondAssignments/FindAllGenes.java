@@ -1,10 +1,3 @@
-
-/**
- * Décrivez votre classe FindAllGenes ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
 public class FindAllGenes {
     public int findStopCodon (String DNA, int startIndex, String stopCodon) {
         int endIndex = DNA.indexOf(stopCodon, startIndex + 3);
