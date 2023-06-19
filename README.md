@@ -1,5 +1,4 @@
 # [Java Programming : Solving Problems with Software](https://www.coursera.org/learn/java-programming)
-Java Programming: Solving Problems with Software
 This repository contains code related to the course "Java Programming: Solving Problems with Software." This course utilizes the BlueJ IDE, which includes specific libraries required for the code to run successfully.
 
 ## BlueJ IDE
