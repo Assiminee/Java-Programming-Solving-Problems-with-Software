@@ -1,12 +1,13 @@
 # [Java Programming : Solving Problems with Software](https://www.coursera.org/learn/java-programming)
-Learn to code in Java and improve your programming and problem-solving skills. You will learn to design algorithms as well as develop and debug programs. Using custom open-source classes, you will write programs that access and transform images, websites, and other types of data. At the end of the course you will build a program that determines the popularity of different baby names in the US over time by analyzing comma separated value (CSV) files. 
+Java Programming: Solving Problems with Software
+This repository contains code related to the course "Java Programming: Solving Problems with Software." This course utilizes the BlueJ IDE, which includes specific libraries required for the code to run successfully.
 
-After completing this course you will be able to:
-1. Edit, compile, and run a Java program;
-2. Use conditionals and loops in a Java program;
-3. Use Java API documentation in writing programs. 
-4. Debug a Java program using the scientific method;
-5. Write a Java method to solve a specific problem;
-6. Develop a set of test cases as part of developing a program;
-7. Create a class with multiple methods that work together to solve a problem; and
-8. Use divide-and-conquer design techniques for a program that uses multiple methods.
+## BlueJ IDE
+To run the code in this repository, it is recommended to use the BlueJ IDE. BlueJ is an educational IDE specifically designed for teaching object-oriented programming. It provides a simplified environment and includes the necessary libraries used in the course.
+
+You can download the BlueJ IDE from the [official website](https://www.bluej.org/)
+
+## External Libraries
+The code in this repository relies on specific libraries included in the BlueJ IDE. These libraries provide additional functionality and support required for certain exercises and projects.
+
+Please note that the main library used in this course is the edu.duke library, which is specific to the BlueJ environment.
