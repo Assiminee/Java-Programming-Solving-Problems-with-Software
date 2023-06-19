@@ -1,12 +1,14 @@
+import edu.duke.*;
+
 public class FindAllGenes {
     public int findStopCodon (String DNA, int startIndex, String stopCodon) {
-        int endIndex = DNA.indexOf(stopCodon, startIndex + 3);
+        int endIndex = DNA.toUpperCase().indexOf(stopCodon, startIndex + 3);
         while (endIndex != -1) {
             int diff = endIndex - startIndex;
             if ((diff % 3) == 0) {
                 return endIndex;
             }
-            endIndex = DNA.indexOf(stopCodon, endIndex + 1);
+            endIndex = DNA.toUpperCase().indexOf(stopCodon, endIndex + 1);
         }
         return -1;
     }
@@ -15,11 +17,12 @@ public class FindAllGenes {
         int taaIndex = findStopCodon(DNA, startIndex, "TAA");
         int tgaIndex = findStopCodon(DNA, startIndex, "TGA");
         int tagIndex = findStopCodon(DNA, startIndex, "TAG");
-        int endIndex = taaIndex;
-        if (endIndex == -1 || tgaIndex < endIndex) {
+        int endIndex = 0;
+        if (taaIndex == -1 || (tgaIndex != -1 && tgaIndex < taaIndex))
             endIndex = tgaIndex;
-        }
-        if (endIndex == -1 || tagIndex < endIndex) {
+        else 
+            endIndex = taaIndex;
+        if (endIndex == -1 || (tagIndex != -1 && tagIndex < endIndex)) {
             endIndex = tagIndex;
         }
         if (endIndex == -1) {
@@ -28,47 +31,147 @@ public class FindAllGenes {
         return DNA.substring(startIndex, endIndex + 3);
     }
     
-    public void printAllGenes (String DNA) {
-        int startIndex = DNA.indexOf("ATG");
-        int geneCount = 0;
-        if (startIndex == -1) {
-            System.out.println("No genes found");
-            return;
-        }
+    public StorageResource getAllGenes (String DNA) {
+        int startIndex = DNA.toUpperCase().indexOf("ATG");
+        StorageResource geneList = new StorageResource();
         while (startIndex != -1) {
             String gene = findGene(DNA, startIndex);
             if (gene.isEmpty()) {  
                 break;
             }
-            System.out.println(gene);
-            geneCount++;
-            startIndex = DNA.indexOf("ATG", startIndex + gene.length());
+            geneList.add(gene);
+            startIndex = DNA.toUpperCase().indexOf("ATG", startIndex + gene.length());
         }
-        if (geneCount != 0) {
-            System.out.println("Number of genes found: " + geneCount);
-        }
-        else
+        return geneList;
+    }
+    
+    public void printGeneList (String DNA) {
+        StorageResource geneList = getAllGenes(DNA);
+        if (geneList.size() == 0) {
             System.out.println("No genes found");
+        }
+        else {
+            for (String gene : geneList.data()) {
+                System.out.println(gene);
+            }
+        }
+    }
+    
+    public float cgRatio (String DNA) {
+        int i;
+        float count = 0;
+        float ratio = DNA.length();
+        for (i = 0; i < ratio; i++) {
+            char ch = DNA.toUpperCase().charAt(i);
+            if (ch == 'C' || ch == 'G')
+                count++;
+        }
+        ratio = count/ratio;
+        return ratio;
+    }
+    
+    public int countCTG (String DNA) {
+        int count = 0;
+        int ctgIndex = DNA.toUpperCase().indexOf("CTG");
+        if (ctgIndex == -1)
+            return 0;
+        while (ctgIndex != -1) {
+            count++;
+            if (ctgIndex + 3 == DNA.length())
+                break;
+            ctgIndex = DNA.toUpperCase().indexOf("CTG", ctgIndex + 3);
+        }
+        return count;
+    }
+    
+    public void processGenes (StorageResource sr) {
+        if (sr.size() == 0) {
+            System.out.println("There are no genes to process");
+            return;
+        }
+        int count = 0;
+        int length = 0;
+        //print all the Strings in sr that are longer than 9 characters
+        System.out.println("Genes that are longer than 9 characters:");
+        for (String gene : sr.data()) {
+            if (gene.length() > 9) {
+                System.out.println(gene);
+                count++;
+            }
+        }
+        
+        //print the number of Strings in sr that are longer than 9 characters
+        System.out.println("The number of genes that are longer than 9 characters is: " + count);
+        count = 0;
+        
+        //print the Strings in sr whose C-G-ratio is higher than 0.35
+        System.out.println("The genes whose C-G-ratio is higher than 0.35 are:");
+        for (String gene : sr.data()) {
+            if (cgRatio(gene) > 0.35) {
+                System.out.println(gene);
+                count++;
+            }
+        }
+        
+        //print the number of strings in sr whose C-G-ratio is higher than 0.35
+        System.out.println("The number of genes whose C-G-ratio is higher than 0.35 is " + count);
+        
+        //print the length of the longest gene in sr
+        for (String gene : sr.data()) {
+            if (gene.length() >= length) {
+                length = gene.length();
+            }
+        }
+        System.out.println("The length of the longest gene is " + length);
     }
     public static void main (String[] args) {
         FindAllGenes test = new FindAllGenes();
+        
         String DNA = "ATCGTATACTGAAAACAGCTTTGAGATTGTTAAACACCGAAGAGTTATGATTTTCAGCGTTGAGGTCTAACCACTCAGCGATTATAGATGTGGAGGGTCTCTTCGCTGTAAGCATACGACGGTCTAGAGCTGGGATGAGGCCCGAACACTGTTATGGGTACGGTTGTAAGTCTTGAAACGTCTTGGAGGGTGGGCCGCCCAAGTACTTGTCCCAGGCGCGGGGTACCCGTATGCTTATCTTAAGGAGACGCGGTGAGAGTGGTCCGAAAGCCCTGGATTCATCTTAGCATGCGGGAAATCCGAAGTTGGAAGGTGAGGGACAGGAAACAATCTGATATGACCCTGTAGATCAACTCTGAACCCCGACATGTCCGAGCGATACCGACTCTACACGGGTGATGCATATCGTTGCGCTCTCTTTATAGAGATGATGCTGAATGGAAGAAAACCGCCACCCATCTCTAAGCGAACAGATTCAATAATGGAACCGGCCGAACTATTTCATAGAATGCAACGACGTTTGACAAATAATGGCGTTCTATCCACTCAAATCTCCGTATACTAGCGTTATCACAGTCGCATAATTAAACGCCAAAAACAAAACGTATATGGCGTTGTAACGCTGCACATTACCCGACATCGTACAGTGCATCATTCTCCGGGAACCAAGCACAATGACTACTAAGCATTACCAGGGAACGCAGATGTCTATCAGCACACCCGTTTTGATTGAGAGACAGCTTAATGTACGCAATTTGAGTAATACACCCTTCATGGTAGGGGACATGGAAGCCATACTGCAACCCTAGTATCACCTTAGAACGGCTACACACATTCGCACTTTCTCCTACGCGGCAACTTGTCGACGTTCTTGAGACGCTGTCGAGTGTTCCCAGCTAGCCTGGTCGGGACAATTATGACAACGGCAGTCCAGCATCATATGCCGCGAGCCGCACATTGGCTCCGTGTCACGCGCGATTGCTAGATCCGGGCA";
-        System.out.println("First Test Case:");
-        test.printAllGenes(DNA);
+        System.out.println("First Test Case: Printing all genes in a DNA strand");
+        test.printGeneList(DNA);
+        System.out.println("\n");
+        
         DNA = "ATCGTATACTGAAAACAGCTTTGAGATTGTTAAACACCGAAGAGTTATGATTTTCAGCGTTGAGGTCCCACTCAGCGATTATAGATGTGGAGGGTCTCTTCGCTGTAAGCATACGACGGTCTAGAGCTGGGATGAGGCCCGAACACTGTTATGGGTACGGTTGTAAGTCTTGAAACGTCTTGGAGGGTGGGCCGCCCAAGTACTTGTCCCAGGCGCGGGGTACCCGTATGCTTATCTTAAGGAGACGCGGTGAGAGTGGTCCGAAAGCCCTGGATTCATCTTAGCATGCGGGAAATCCGAAGTTGGAAGGTGAGGGACAGGAAACAATCTGATATGACCCTGTAGATCAACTCTGAACCCCGACATGTCCGAGCGATACCGACTCTACACGGGTGATGCATATCGTTGCGCTCTCTTTATAGAGATGATGCTGAATGGAAGAAAACCGCCACCCATCTCTAAGCGAACAGATTCAATAATGGAACCGGCCGAACTATTTCATAGAATGCAACGACGTTTGACAAATAATGGCGTTCTATCCACTCAAATCTCCGTATACTAGCGTTATCACAGTCGCATAATTAAACGCCAAAAACAAAACGTATATGGCGTTGTAACGCTGCACATTACCCGACATCGTACAGTGCATCATTCTCCGGGAACCAAGCACAATGACTACTAAGCATTACCAGGGAACGCAGATGTCTATCAGCACACCCGTTTTGATTGAGAGACAGCTTAATGTACGCAATTTGAGTAATACACCCTTCATGGTAGGGGACATGGAAGCCATACTGCAACCCTAGTATCACCTTAGAACGGCTACACACATTCGCACTTTCTCCTACGCGGCAACTTGTCGACGTTCTTGAGACGCTGTCGAGTGTTCCCAGCTAGCCTGGTCGGGACAATTATGACAACGGCAGTCCAGCATCATATGCCGCGAGCCGCACATTGGCTCCGTGTCACGCGCGATTGCTAGATCCGGGCA";
-        System.out.println("Second Test Case:");
-        test.printAllGenes(DNA);
+        System.out.println("Second Test Case: Printing all genes in a DNA strand");
+        test.printGeneList(DNA);
+        System.out.println("\n");
+        
         DNA = "ATCGTATACTGAAAACAGCTTTGAGATTGTTAAACACCGAAGAGTTATGATTTTCAGCGTTGAGGTCCCACTCAGCGATTATAGATGTGGAGGGTCTCTTCGCTGTAAGCATACGACGGTCAGCTGGGATGAGGCCCGAACACTGTTATGGGTACGGTTGTAAGTCTTGAAACGTCTTGGAGGGTGGGCCGCCCAAGTACTTGTCCCAGGCGCGGGGTACCCGTATGCTTATCTTAAGGAGACGCGGTGAGAGTGGTCCGAAAGCCCTGGATTCATCTTAGCATGCGGGAAATCCGAAGTTGGAAGGTGAGGGACAGGAAACAATCTGATATGACCCTGTAGATCAACTCTGAACCCCGACATGTCCGAGCGATACCGACTCTACACGGGTGATGCATATCGTTGCGCTCTCTTTATAGAGATGATGCTGAATGGAAGAAAACCGCCACCCATCTCTAAGCGAACAGATTCAATAATGGAACCGGCCGAACTATTTCATAGAATGCAACGACGTTTGACAAATAATGGCGTTCTATCCACTCAAATCTCCGTATACTAGCGTTATCACAGTCGCATAATTAAACGCCAAAAACAAAACGTATATGGCGTTGTAACGCTGCACATTACCCGACATCGTACAGTGCATCATTCTCCGGGAACCAAGCACAATGACTACTAAGCATTACCAGGGAACGCAGATGTCTATCAGCACACCCGTTTTGATTGAGAGACAGCTTAATGTACGCAATTTGAGTAATACACCCTTCATGGTAGGGGACATGGAAGCCATACTGCAACCCTAGTATCACCTTAGAACGGCTACACACATTCGCACTTTCTCCTACGCGGCAACTTGTCGACGTTCTTGAGACGCTGTCGAGTGTTCCCAGCTAGCCTGGTCGGGACAATTATGACAACGGCAGTCCAGCATCATATGCCGCGAGCCGCACATTGGCTCCGTGTCACGCGCGATTGCTAGATCCGGGCA";
-        System.out.println("Third Test Case:");
-        test.printAllGenes(DNA);
+        System.out.println("Third Test Case: Printing all genes in a DNA strand");
+        test.printGeneList(DNA);
+        System.out.println("\n");
+        
         DNA = "ATCGTATACTGAAAACAGCTTTGAGATTGTTAAACACCGAAGAGTTATTTTCAGCGTTGAGGTCCCACTCAGCGATTATAGTGGAGGGTCTCTTCGCTGTAAGCATACGACGGTCAGCTGGGAGGCCCGAACACTGTTGGTACGGTTGTAAGTCTTGAAACGTCTTGGAGGGTGGGCCGCCCAAGTACTTGTCCCAGGCGCGGGGTACCCGTCTTATCTTAAGGAGACGCGGTGAGAGTGGTCCGAAAGCCCTGGATTCATCTTAGCCGGGAAATCCGAAGTTGGAAGGTGAGGGACAGGAAACAATCTGATACCCTGTAGATCAACTCTGAACCCCGACTCCGAGCGATACCGACTCTACACGGGTGCATATCGTTGCGCTCTCTTTATAGAGCTGAGAAGAAAACCGCCACCCATCTCTAAGCGAACAGATTCAATAGAACCGGCCGAACTATTTCATAGACAACGACGTTTGACAAATAGCGTTCTATCCACTCAAATCTCCGTATACTAGCGTTATCACAGTCGCATAATTAAACGCCAAAAACAAAACGTCGTTGTAACGCTGCACATTACCCGACATCGTACAGTGCATCATTCTCCGGGAACCAAGCACAACTACTAAGCATTACCAGGGAACGCAGTCTATCAGCACACCCGTTTTGATTGAGAGACAGCTTATACGCAATTTGAGTAATACACCCTTCGTAGGGGACGAAGCCATACTGCAACCCTAGTATCACCTTAGAACGGCTACACACATTCGCACTTTCTCCTACGCGGCAACTTGTCGACGTTCTTGAGACGCTGTCGAGTGTTCCCAGCTAGCCTGGTCGGGACAATTACAACGGCAGTCCAGCATCATCCGCGAGCCGCACATTGGCTCCGTGTCACGCGCGATTGCTAGATCCGGGCAF";
-        System.out.println("Fourth Test Case:");
-        test.printAllGenes(DNA);
+        System.out.println("Fourth Test Case: Printing all genes in a DNA strand");
+        test.printGeneList(DNA);
+        System.out.println("\n");
+        
         DNA = "ATCGTATACAAACAGCTTTGTACACCGAAGAGTTATTTTCAGCGTGGTCCCACTCAGCGATTGTGGAGGGTCTCTTCGCTGGCATACGACGGTCAGCTGGGAGGCCCGAACACTGTTATGGGTACGGTTGGTCCGTCTTGGAGGGTGGGCCGCCCAAGTACTTGTCCCAGGCGCGGGGTACCCGTATGCTTATCTGGAGACGCGGGAGTGGTCCGAAAGCCCTGGATTCATCTCATGCGGGAAATCCGAAGTTGGAAGGGGGACAGGAAACAATCTACCCTCAACTCACCCCGACATGTCCGAGCGATACCGACTCTACACGGGTGCATATCGTTGCGCTCTCTTGCATGGAAGAAAACCGCCACCCATCTCGCGAACAGATTCAATGGAACCGGCCGAACTATTTCAAATGCAACGACGTTCAAATGGCGTTCTATCCACTCAAATCTCCGTATACCGTTATCACAGTCGCATACGCCAAAAACAAAACGTATATGGCGTTGCGCTGCACATTACCCGACATCGTACAGTGCATCATTCTCCGGGAACCAAGCACAACTACGCATTACCAGGGAACGCAGATGTCTATCAGCACACCCGTTCAGCTTGTACGCAATTGTACACCCTTCATGGGGGACATGGAAGCCATACTGCAACCCTATCACCCGGCTACACACATTCGCACTTTCTCCTACGCGGCAACTTGTCGACGTTCCGCTGTCGAGTGTTCCCAGCCCTGGTCGGGACAATTACAACGGCAGTCCAGCATCATATGCCGCGAGCCGCACATTGGCTCCGTGTCACGCGCGATTGCATCCGGGCA";
-        System.out.println("Fifth Test Case:");
-        test.printAllGenes(DNA);
+        System.out.println("Fifth Test Case: Printing all genes in a DNA strand");
+        test.printGeneList(DNA);
+        System.out.println("\n");
+        
         DNA = "ATCGTATACTGAAAACAGCTTTGAGATTGTTAAACACCGAAGAGTTATGATTTTCAGCGTTGAGGTCCCACTCAGCGATTATAGATGTGGAGGGTCTCTTCGCTGTAAGCATACGACGGTCAGCTGGGATGAGGCCCGAACACTGTTATGGGTACGGTTGTAAGTCTTGAAACGTCTTGGAGGGTGGGCCGCCCAAGTACTTGTCCCAGGCGCGGGGTACCCGTATGCTTATCTTAAGGAGACGCGGTGAGAGTGGTCCGAAAGCCCTGGATTCATCTTAGCATGCGGGAAATCCGAAGTTGGAAGGTGAGGGACAGGAAACAATCTGATATGACCCTGTAGATCAACTCTGAACCCCGACATGTCCGAGCGATACCGACTCTACACGGGTGATGCATATCGTTGCGCTCTCTTTATAGAGATGATGCTGAATGGAAGAAAACCGCCACCCATCTCTAAGCGAACAGATTCAATAATGGAACCGGCCGAACTATTTCATAGAATGCAACGACGTTTGACAAATAATGGCGTTCTATCCACTCAAATCTCCGTATACTAGCGTTATCACAGTCGCATAATTAAACGCCAAAAACAAAACGTATATGGCGTTGTAACGCTGCACATTACCCGACATCGTACAGTGCATCATTCTCCGGGAACCAAGCACAATGACTACTAAGCATTACCAGGGAACGCAGATGTCTATCAGCACACCCGTTTTGATTGAGAGACAGCTTAATGTACGCAATTTGAGTAATACACCCTTCATGGTAGGGGACATGGAAGCCATACTGCAACCCTAGTATCACCTTAGAACGGCTACACACATTCGCACTTTCTCCTACGCGGCAACTTGTCGACGTTCTTGAGACGCTGTCGAGTGTTCCCAGCTAGCCTGGTCGGGACAATTATGACAACGGCAGTCCAGCATCATATGCCGCGAGCCGCACATTGGCTCCGTGTCACGCGCGATTGCTAGATCCGGGCAATGTGTAA";
-        System.out.println("Sixth Test Case:");
-        test.printAllGenes(DNA);
+        System.out.println("Sixth Test Case: Printing all genes in a DNA strand");
+        test.printGeneList(DNA);
+        System.out.println("\n");
+        
+        DNA = "ATGACGCGTAGGTCTGACGTCAGC";
+        System.out.println("Seventh Test Case: Printing all genes in a DNA strand");
+        test.printGeneList(DNA);
+        System.out.println("The CG Ratio in the DNA strand \"" + DNA + "\"" + " is: " + test.cgRatio(DNA));
+        System.out.println("\n");
+        
+        DNA = "CTGATGCTGATGCTG";
+        System.out.println("Eigth Test Case:");
+        System.out.println("The codon \"CTG\" appears " + test.countCTG(DNA) + " times in the DNA strand \"" + DNA + "\"");
+        System.out.println("\nNinth Test Case:");
+        FileResource fr = new FileResource("genes.txt");
+        DNA = fr.asString();
+        System.out.println("The codon \"CTG\" appears " + test.countCTG(DNA) + " times in the DNA strand \"" + DNA + "\"");
+        
+        
+
     }
 }
