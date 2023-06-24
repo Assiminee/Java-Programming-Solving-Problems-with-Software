@@ -16,7 +16,7 @@ The code includes the following methods:
 
 - testTotalNamesPerGender(): This method prompts the user to enter a year, loads the corresponding CSV file, and displays the number of names for a given gender in that year.
 
-- getFileName(int year): Given a year, this method returns the complete path to the corresponding CSV file. Note that the user needs to download the (CSV files)[http://www.dukelearntoprogram.com/course2/data/us_babynames.zip] and modify the path to the location where the CSV files are stored on their device.
+- getFileName(int year): Given a year, this method returns the complete path to the corresponding CSV file. Note that the user needs to download the [CSV files](http://www.dukelearntoprogram.com/course2/data/us_babynames.zip) and modify the path to the location where the CSV files are stored on their device.
 
 - getRank(int year, String name, String gender): Given a year, a name, and a gender, this method retrieves the rank of the name in the CSV file for that year.
 
@@ -45,6 +45,6 @@ The code includes the following methods:
 - testTotal(): This method tests the getTotalBirthsRankedHigher() method by prompting the user to enter a name, a gender, and a year, and then displays the number of babies born with names ranked higher than the given name.
 
 ### Note: 
-Before running the code, ensure that the CSV files are downloaded from (this link)[http://www.dukelearntoprogram.com/course2/data/us_babynames.zip] and update the path in the getFileName() method to the location where the CSV files are stored on your device.
+Before running the code, ensure that the CSV files are downloaded from [this link](http://www.dukelearntoprogram.com/course2/data/us_babynames.zip) and update the path in the getFileName() method to the location where the CSV files are stored on your device.
 
 The assignment instructions for this mini-project can be found in (the accompanying PDF file)[].
