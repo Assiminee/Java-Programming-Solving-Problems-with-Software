@@ -1,6 +1,6 @@
 # MiniProject Exercise:
 
-The "BabyNames" class provides various functionalities to analyze and manipulate CSV files containing baby names, their genders, and the number of births associated with each name in a given year. This code represents the solution to the mini project and final assignment for the "Java Programming Solving Problems With Software" course on Coursera. It is designed to work with a specific dataset of baby names in the USA from 1880 to 2014. You can find the .zip file containing all the CSV files used for this assignment by clicking [here](http://www.dukelearntoprogram.com/course2/data/us_babynames.zip)
+The "BabyNames" class provides various functionalities to analyze and manipulate CSV files containing baby names, their genders, and the number of births associated with each name in a given year. This code represents the solution to the mini project and final assignment for the "Java Programming Solving Problems With Software" course on Coursera. It is designed to work with a specific dataset of baby names in the USA from 1880 to 2014. You can find the .zip file containing all the CSV files used for this assignment by clicking [here](http://www.dukelearntoprogram.com/course2/data/us_babynames.zip).
 
 ## Code description:
 
@@ -47,4 +47,4 @@ The code includes the following methods:
 ### Note: 
 Before running the code, ensure that the CSV files are downloaded from [this link](http://www.dukelearntoprogram.com/course2/data/us_babynames.zip) and update the path in the getFileName() method to the location where the CSV files are stored on your device.
 
-The assignment instructions for this mini-project can be found in (the accompanying PDF file)[].
+The assignment instructions for this mini-project can be found in [the accompanying PDF file](https://github.com/Assiminee/Java-Programming-Solving-Problems-with-Software/blob/main/Baby%20Names/MiniProject-ProgrammingExerciseGuide.pdf).
